@@ -14,16 +14,21 @@
     <main>
         <section class="containter">
             <div class="flex-row align-start align-stretch-md align-content-start align-content-stretch-md min-100-vh">
-                <div class="col-12 col-md-3 bg-light p-3">
+                <div class="col-12 col-md-3 p-3">
                     <h1>Search For A City:</h1>
                     <form id="search-form" class="mb-2">
                         <input id="search-input" class="form-input w-100" type="text" placeholder="Los Angeles">
-                        <button class="btn btn-danger btn-block w-100">Search</button>
+                        <button class="btn btn-block w-100">Search</button>
                     </form>
                 </div>
-                
+                <div class="h1 col-12 search-storage">Search History
+                    <div id="search-city"></div>
+                </div>
                 <div class="col-12 col-md-9 p-3 text-dark">
                     <div id="result-content"></div>
+                </div>
+                <div class="col-12 container paddingweather">
+                    <div id="5dayforcast"></div>
                 </div>
             </div>
         </section>

@@ -1,10 +1,14 @@
-:root {--burgundy: rgb(88, 23, 23);--white: #ffffff;}
+/* :root {--burgundy: rgb(88, 23, 23);--white: #ffffff;} */
 
 /* * {background-color: salmon; margin: 0px; padding: 0px;} */
 
-header {font-size: 35px; padding: 15px; background-color: var(--burgundy);}
+header {font-size: 35px; padding: 15px; 
+    background: linear-gradient(90deg, rgba(24,218,173,1) 0%, rgba(42,133,124,1) 31%, rgba(115,60,170,1) 100%, rgba(255,0,0,1) 100%);}
 
-.btn {background-color: var(--burgundy); margin-top: 15px; border: 1px black;
+.btn {background: linear-gradient(90deg, rgba(24,218,173,1) 0%, rgba(42,133,124,1) 31%, rgba(115,60,170,1) 100%, rgba(255,0,0,1) 100%);
+    margin-top: 15px; border: 1px black; color: white;
     border-radius: 10px; box-shadow: 8px 8px 5px gray; transition-delay: 0.4s;}
 
-.btn:hover {background-blend-mode:luminosity;}
+.btn:hover {background-blend-mode:color-burn}
+
+/* .search-storage {} */

@@ -12,3 +12,5 @@ header {font-size: 35px; padding: 15px;
 .btn:hover {background-blend-mode:color-burn}
 
 /* .search-storage {} */
+
+#result-content {display: block;}

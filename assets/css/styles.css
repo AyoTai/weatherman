@@ -1,11 +1,13 @@
-/* :root {--burgundy: rgb(88, 23, 23);--white: #ffffff;} */
+:root {--color:linear-gradient(90deg, rgba(24,218,173,1) 0%, rgba(42,133,124,1) 31%, rgba(115,60,170,1) 100%, rgba(255,0,0,1) 100%);--white: #ffffff;}
 
 /* * {background-color: salmon; margin: 0px; padding: 0px;} */
 
-header {font-size: 35px; padding: 15px; 
-    background: linear-gradient(90deg, rgba(24,218,173,1) 0%, rgba(42,133,124,1) 31%, rgba(115,60,170,1) 100%, rgba(255,0,0,1) 100%);}
+main {padding: 0px; margin: 0px;}
 
-.btn {background: linear-gradient(90deg, rgba(24,218,173,1) 0%, rgba(42,133,124,1) 31%, rgba(115,60,170,1) 100%, rgba(255,0,0,1) 100%);
+header {font-size: 35px; padding: 15px; 
+    background: var(--color);}
+
+.btn {background: var(--color);
     margin-top: 15px; border: 1px black; color: white;
     border-radius: 10px; box-shadow: 8px 8px 5px gray; transition-delay: 0.4s;}
 
@@ -13,4 +15,14 @@ header {font-size: 35px; padding: 15px;
 
 /* .search-storage {} */
 
-#result-content {display: block;}
+#search-history {display: flex;}
+
+.float-container {padding:20px;}
+
+.float-child {width:50%;float:left;padding:20px;}
+
+.weather-result {border: 5px solid rgb(115,60,170,1); padding: 30px;}
+
+.badge1 {background: green;}
+.badge2 {background: yellow;}
+.badge3 {background: red;}

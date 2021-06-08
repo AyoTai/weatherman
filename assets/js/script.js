@@ -20,7 +20,7 @@ var currentDay = moment().format("MM/DD/YYYY");
 // Functions //
 // To fetch lattitude and longitude from user input
 function geoCoords(searchInputVal){
-    var coordUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchInputVal + apiKey;
+    var coordUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + searchInputVal + apiKey;
 
     fetch(coordUrl)
         .then(function (response){

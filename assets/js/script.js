@@ -6,17 +6,20 @@ const searchBtn = document.querySelector('.btn');
 const searchInput = document.querySelector('#search-input');
 const fiveDayForcast = document.querySelector('#fivedayforecast');
 var searchInputVal = document.querySelector('#search-input').value;
+var searchHistory = document.querySelector('.search-history');
 const baseUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='
 const apiKey = '&exclude=hourly,minutely,alerts&appid=c8659540ec6ffab5c1dacd3f595ebb2e&units=imperial';
 const button = document.querySelector('.btn')
 const weathers = [];
 var forecastDay = [];
-var currentDay = moment().format("MM-DD-YYYY");
+var searchedCities = [];
+
+var currentDay = moment().format("MM/DD/YYYY");
 
 
 // Functions //
 // To fetch lattitude and longitude from user input
-function geoCoords(){
+function geoCoords(searchInputVal){
     var coordUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchInputVal + apiKey;
 
     fetch(coordUrl)
@@ -24,14 +27,15 @@ function geoCoords(){
             return response.json();
         })
         .then(function (data){
-            console.log(data);
-            console.log(data[0].lat);
-            console.log(data[0].lon);
+            // console.log(data);
+            // console.log(data[0].lat);
+            // console.log(data[0].lon);
             var lattitude = data[0].lat;
             var longitude = "&lon=" + data[0].lon;
             searchWeather(lattitude, longitude);
         })
 }
+
 
 // to fetch the weather forecast of the city that user inputs
 function searchWeather(lattitude, longitude){
@@ -43,14 +47,13 @@ function searchWeather(lattitude, longitude){
             return response.json();
         })
         .then(function (data){
-            console.log(data);
-            // for (let i = 0; i < data.length; i++) {
-            console.log(data.timezone);
-            console.log(data.current.weather[0].icon);
-            console.log(data.current.temp);
-            console.log(data.current.wind_speed);
-            console.log(data.current.humidity);
-            console.log(data.current.uvi);
+            // console.log(data);
+            // console.log(data.timezone);
+            // console.log(data.current.weather[0].icon);
+            // console.log(data.current.temp);
+            // console.log(data.current.wind_speed);
+            // console.log(data.current.humidity);
+            // console.log(data.current.uvi);
             var weather = {
                 cityName: data.timezone,
                 cityCastIcon: data.current.weather[0].icon,
@@ -62,9 +65,11 @@ function searchWeather(lattitude, longitude){
             weathers.push(weather);
             displayWeather(data);
             displayForecast(data);
+            savedCities();
         })
-        searchInputVal = '';
+        
 }
+
 
 // to display the weather 
 function displayWeather(data){
@@ -118,18 +123,21 @@ function displayWeather(data){
 
 // to display 5day forecast
 function displayForecast(data){
+    var forecastDiv = document.createElement('div');
+    forecastDiv.className = "forecast";
+    fiveDayForcast.appendChild(forecastDiv);
     var forecastHeader = document.createElement('h3');
     forecastHeader.textContent = "5 Day Forecast";
-    forecastHeader.className = "text-center forecast";
-    fiveDayForcast.appendChild(forecastHeader);
+    forecastHeader.className = "text-center";
+    forecastDiv.appendChild(forecastHeader);
     fiveDays();
 
     for (let i = 0; i < 5; i++){
         var weathCards = document.createElement('div');
-        weathCards.className = "col-2 col-md-4 col-sm-6 float-child cards";
+        weathCards.className = "forecast col-2 col-md-4 col-sm-6 float-child cards";
         weathCards.textContent = forecastDay[i];
-        console.log(forecastDay[i]);
-        fiveDayForcast.appendChild(weathCards);
+        // console.log(forecastDay[i]);
+        forecastDiv.appendChild(weathCards);
         
         var cardIcon = document.createElement('img');
         cardIcon.className = 'weather';
@@ -156,15 +164,25 @@ function displayForecast(data){
 // 5 day forcast
 function fiveDays() {
     for (var i = 1; i < 6; i++) {
-      var newDay = moment().add(i, "days").format("MM-DD-YYYY");
+      var newDay = moment().add(i, "days").format("MM/DD/YYYY");
       forecastDay.push(newDay);
     }
-  }
+}
 
+// to display past searches
+function savedCities(){
+    var pastSearch = document.createElement('button');
+    pastSearch.classList.add('card', 'btn');
+    pastSearch.textContent = searchInputVal;
+    pastSearch.addEventListener('click', handleSearchFormSubmit);
+    searchHistory.appendChild(pastSearch);
+}
 
 // to clear last result before appending more
 function clearDiv(){
-    document.querySelectorAll('.weather').remove();
+    document.querySelector('.weather-result').remove();
+    document.querySelector('.forecast').remove();
+    
 }
 
 
@@ -176,12 +194,55 @@ function handleSearchFormSubmit(event){
 
     if (!searchInputVal){
         alert("You Need to Enter a Valid City!");
+    } else {
+        // save input into searchedCities array 
+        // save searchedcity into local storage
+        // console.log(searchedCities);
+        searchedCities.push(searchInputVal);
+        // console.log(typeof searchInputVal);
+        localStorage.setItem('searchedCities', JSON.stringify(searchedCities));
     }
-    geoCoords();
+
+    geoCoords(searchInputVal);
     clearDiv();
     // searchWeather();
     // var timeout = setTimeout(displayWeather(),5000);
     
 }
 
+// to accesss local storage
+function getLS() {
+    // console.log(JSON.stringify(localStorage));
+    if (localStorage.getItem("searchedCities") === null ||
+      localStorage.getItem("searchedCities") === ""){
+      searchedCities = [];
+    } else {
+      searchedCities = JSON.parse(localStorage.getItem("searchedCities"));
+    }
+    console.log(searchedCities)
+}
+
+//
+function loadHistory(){
+    console.log(searchedCities)
+    for (let i = 0; i < searchedCities.length; i++){
+        const displayHistory = searchedCities[i];
+        console.log(displayHistory);
+        var historyDiv = document.createElement('div');
+        searchHistory.appendChild(historyDiv);
+        historyDiv.textContent = displayHistory;
+        historyDiv.classList.add('card', 'btn');
+        historyDiv.addEventListener('click', function(){
+            console.log($(this).text());
+            geoCoords($(this).text());
+            clearDiv();
+        })
+    }
+}
+
+
 button.addEventListener('click', handleSearchFormSubmit);
+
+getLS();
+loadHistory();
+// id.html('');

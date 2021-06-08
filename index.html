@@ -14,21 +14,19 @@
     <main>
         <section class="containter">
             <div class="row min-100-vh">
-                <div class="col-12 col-md-3 float-container">
+                <div class="col-3 col-md-3 float-container">
                     <h1>Search For A City:</h1>
                     <form id="search-form" class="mb-2">
                         <input id="search-input" class="form-input w-100" type="text" placeholder="Los Angeles">
                         <button class="btn btn-block w-100">Search</button>
                     </form>
                 </div>
-                <div class="result-content float-child"></div>
-                <div class="h1 col-12 search-storage">Search History
+                <div class="col-9 result-content float-child"></div>
+                <div class="h1 search-storage">Search History
                 </div>
-                <div class="col-12 col-md-9">
-                    <div id="search-history"></div>
-                </div>
-                <div class="col-12 float-container">
-                    <div id="fivedayforecast"></div>
+                <div class="col-3 search-history"></div>
+        
+                <div class="col-9 float-container" id="fivedayforecast">
                 </div>
             </div>
         </section>

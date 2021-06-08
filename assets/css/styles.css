@@ -1,6 +1,6 @@
 :root {--color:linear-gradient(90deg, rgba(24,218,173,1) 0%, rgba(42,133,124,1) 31%, rgba(115,60,170,1) 100%, rgba(255,0,0,1) 100%);--white: #ffffff;}
 
-* {background-color: rgb(114, 250, 166); margin: 0px; padding: 0px;}
+/* * {background-color: rgb(69, 196, 118); margin: 0px; padding: 0px;} */
 
 main {padding: 0px; margin: 0px;}
 
@@ -21,11 +21,13 @@ header {font-size: 35px; padding: 15px;
 
 .float-child {width:50%;float:left;padding:20px;}
 
-.weather-result {border: 5px solid rgb(115,60,170,1); padding: 50px; margin-left: 250px;}
+.weather-result {border: 5px solid rgb(115,60,170,1); padding: 50px; margin-left: 250px; background: rgba(24,218,173,1);}
 
 .badge1 {background: green;}
 .badge2 {background: yellow;}
 .badge3 {background: red;}
 
 .cards {border: 5px solid rgb(115,60,170,1); padding: 10px; width: 15%;
-     justify-content: space-around; margin-left: 50px;}
+     justify-content: space-around; margin-left: 50px; background: rgba(24,218,173,1);}
+
+.card { width: 50%; text-align: center;}

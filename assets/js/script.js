@@ -106,7 +106,7 @@ function displayWeather(data){
         uviSpan.classList.add("badge1");
     } else if (data.current.uvi > 5 && data.current.uvi <= 7){
         uviSpan.classList.add("badge2");
-     } else {
+    } else {
         uviSpan.classList.add("badge3");
     }
 
@@ -175,7 +175,11 @@ function savedCities(){
     pastSearch.classList.add('card', 'btn');
     pastSearch.textContent = searchInputVal;
     pastSearch.addEventListener('click', handleSearchFormSubmit);
-    searchHistory.appendChild(pastSearch);
+    console.log(pastSearch);
+    if (searchInputVal !== null || searchInputVal !== undefined){
+    } else {
+        searchHistory.appendChild(pastSearch);
+    }
 }
 
 // to clear last result before appending more
@@ -229,9 +233,13 @@ function loadHistory(){
         const displayHistory = searchedCities[i];
         console.log(displayHistory);
         var historyDiv = document.createElement('div');
-        searchHistory.appendChild(historyDiv);
+        // searchHistory.appendChild(historyDiv);
         historyDiv.textContent = displayHistory;
         historyDiv.classList.add('card', 'btn');
+        if (searchInputVal === null || searchInputVal === undefined){
+        } else {
+            searchHistory.appendChild(historyDiv);
+        }
         historyDiv.addEventListener('click', function(){
             console.log($(this).text());
             geoCoords($(this).text());
@@ -245,4 +253,3 @@ button.addEventListener('click', handleSearchFormSubmit);
 
 getLS();
 loadHistory();
-// id.html('');
